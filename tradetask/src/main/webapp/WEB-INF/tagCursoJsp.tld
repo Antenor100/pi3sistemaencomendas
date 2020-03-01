@@ -1,0 +1,10 @@
+<taglib>
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>2.0</jsp-version>
+	<short-name>custom tag</short-name>
+	<tag>
+		<name>minhatag</name>
+		<tag-class>views.tags.tagCursoJsp</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+</taglib>
