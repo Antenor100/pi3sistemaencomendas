@@ -8,7 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * 
+ * Classe utilizada para executar operações no banco de dados. (Data Base Manipulation).
+ *
+ */
 public class DBM {
 	//Atributos
 	private Statement stm = null;

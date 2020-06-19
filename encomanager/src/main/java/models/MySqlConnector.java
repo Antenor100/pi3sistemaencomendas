@@ -1,10 +1,14 @@
 package models;                   
  
-//Classes necessárias para uso de Banco de dados
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
+	
+/**
+ * Classe utilizada para manipular as conexões com o SGBD MySql.
+ * 
+ * @Obs Os dados da conexão como: ip, usuário, senha e outros são passados diretamente dentro do fonte desta classe "MySqlConnector.java".
+ */
 public class MySqlConnector {
 
 	private static String status = "Não conectou...";
