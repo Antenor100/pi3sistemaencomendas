@@ -1,0 +1,22 @@
+## TIPOS DE TABELAS ##
+TGC - Tabela geral de configuração
+TGP - Tabela geral de pessoas
+TCL - Tabela controle de limites
+TCE - Tabela controle encomendas
+
+## TABELAS EXISTENTES ATUALMENTE ##
+TCEPRO - Produtos
+TGPUSU - Usuários
+TGPCLI - Clientes
+TGCPAR - Parâmetros
+TGCTUS - Tipo Usuários
+TCLILD - Itens limite diario
+TCEENC - Encomendas
+TCEVEN - Vendas
+TCEIEN - Item encomenda
+TGCACE - Acessos
+TGCIAT - Itens acessos por tipo usuários
+
+
+
+
