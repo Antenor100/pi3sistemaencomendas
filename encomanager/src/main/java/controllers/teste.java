@@ -2,8 +2,8 @@ package controllers;
 
 import java.sql.Connection;
 
-import models.DBM;
-import models.MySqlConnector;
+import models.conexao.MySqlConnector;
+import models.manipulacao.DBM;
 
 public class teste {	
 	public static void main(String[] args) {
