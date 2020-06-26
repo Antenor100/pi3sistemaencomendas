@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link rel="shortcut icon" href="../imagens/favicon.png" />
-
-    <title>Entrar</title>
-    
     <link href="../resources/bootstrap/bootstrap.min.css" rel="stylesheet">
     <script src="../resources/bootstrap/bootstrap.min.js"></script>
     <script src="../resources/jquery/jquery-3.4.1.min.js"></script>
-    <script src="../resources/popper/popper.min.js"></script>
+
+    <title>Entrar</title>
+
+    <link href="login.css" rel="stylesheet">
   </head>
 
   <body>
