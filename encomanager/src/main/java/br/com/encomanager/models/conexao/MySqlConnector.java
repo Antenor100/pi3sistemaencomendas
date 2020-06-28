@@ -1,4 +1,4 @@
-package models.conexao;                   
+package br.com.encomanager.models.conexao;                   
  
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -20,13 +20,14 @@ public class MySqlConnector {
 
 		try {				
 			//Configurando a nossa conexão com um banco de dados//
-			final String serverName = "localhost"; //caminho do servidor do BD
+			final String serverName = "localhost:3306"; //caminho do servidor do BD
 			final String mydatabase = "encomanager"; //nome do seu banco de dados
 			final String urlParams = "useTimezone=true&serverTimezone=UTC";
 			final String username = "root"; //nome de um usuário de seu BD
 			final String password = "admin"; //sua senha de acesso
 			String url = "jdbc:mysql://" + serverName + "/" + mydatabase + "?" + urlParams;
 					
+			Class.forName("com.mysql.jdbc.Driver");
 			connection = DriverManager.getConnection(url, username, password);
 			
 			//Seta status da conexão
@@ -37,7 +38,7 @@ public class MySqlConnector {
 			}
 			return connection;
 
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			//Não conseguindo se conectar ao banco
 			System.out.println("Nao foi possivel conectar ao Banco de Dados.");
 			e.printStackTrace();

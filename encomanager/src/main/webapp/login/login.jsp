@@ -29,16 +29,16 @@
           <div class="row py-3 justify-content-center">
             <span style="font-size:20px;" class="text-center font-weight-bold text-primary">BEM VINDO</span>
           </div>
-          <form>
+          <form action="${pageContext.request.contextPath}/ValidaLogin" method="post">
             <!--Campos-->
             <div class="form-row form-group justify-content-center">
               <div class="col-8">
-                <input id="usuario" type="text" class="form-control text-center" placeholder="Usuário">
+                <input id="usuario" name="inputUsuarioValue" type="text" class="form-control text-center" placeholder="Usuário">
               </div>
             </div>
             <div class="form-row form-group justify-content-center">
               <div class="col-8">
-                <input id="senha" type="password" class="form-control text-center" placeholder="Senha">
+                <input id="senha" name="inputSenhaValue" type="password" class="form-control text-center" placeholder="Senha">
               </div>
             </div>
             <!--Botão entrar-->

@@ -1,12 +1,15 @@
-package controllers;
+package br.com.encomanager.controllers;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 
-import models.conexao.MySqlConnector;
-import models.manipulacao.DBM;
+import br.com.encomanager.models.conexao.MySqlConnector;
+import br.com.encomanager.models.manipulacao.DBM;
 
 public class teste {	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws NoSuchAlgorithmException {
 		/*		
 		Connection con = MySqlConnector.abreConexao();
 		MySqlConnector.statusConexao();
@@ -14,6 +17,13 @@ public class teste {
 		MySqlConnector.fecharConexao();
 		MySqlConnector.statusConexao();
 		*/
+		
+
+       String s="Texto de Exemplo";
+       MessageDigest m=MessageDigest.getInstance("MD5");
+       m.update(s.getBytes(),0,s.length());
+       System.out.println("MD5: "+new BigInteger(1, m.digest()).toString(16));
+		 
 		
 		//Manipulando tabela usuario
 		

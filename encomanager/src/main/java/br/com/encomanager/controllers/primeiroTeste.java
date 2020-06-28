@@ -1,4 +1,4 @@
-package controllers;
+package br.com.encomanager.controllers;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
