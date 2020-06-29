@@ -9,7 +9,7 @@
     <script src="${pageContext.request.contextPath}/resources/bootstrap/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/jquery/jquery-3.4.1.min.js"></script>
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/fontawesome/font-awesome-4.7.0/css/font-awesome.min.css">
 
     <title>Entrar</title>
 
