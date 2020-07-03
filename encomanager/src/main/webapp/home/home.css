@@ -1,0 +1,31 @@
+html,body {
+	width: 100%;
+	height: 100%;
+}
+
+.leftSideBarStyle {
+	background-color: #029BFD;
+	width: 5vw;
+	height: 100vh;
+}
+
+@media screen and (max-width: 800px) {
+	.leftSideBarStyle {
+		width: 10vw;		
+	}
+}
+
+.logoHome:hover {
+	cursor: pointer;
+}
+
+#iconeExpancao {
+	position: absolute;
+    top: 45%;
+    right: 0%;
+    padding-right: 4px;
+}
+
+#iconeExpancao:hover {
+	cursor: pointer;
+}
