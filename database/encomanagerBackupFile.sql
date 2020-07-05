@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.29, for Win64 (x86_64)
 --
--- Host: localhost    Database: ENCOMANAGER
+-- Host: localhost    Database: encomanager
 -- ------------------------------------------------------
 -- Server version	5.7.29-log
 
@@ -325,7 +325,7 @@ CREATE TABLE `tgpusu` (
 
 LOCK TABLES `tgpusu` WRITE;
 /*!40000 ALTER TABLE `tgpusu` DISABLE KEYS */;
-INSERT INTO `tgpusu` VALUES (2,'Antenor',1,'12345','antenor@gmail.com');
+INSERT INTO `tgpusu` VALUES (2,'antenor',1,'827ccb0eea8a706c4c34a16891f84e7b','antenor@gmail.com');
 /*!40000 ALTER TABLE `tgpusu` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -338,4 +338,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-26  1:47:31
+-- Dump completed on 2020-07-03 19:30:30

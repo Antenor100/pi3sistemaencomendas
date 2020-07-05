@@ -16,3 +16,7 @@ body {
   top: 28%;
   color: #6C757D;
 }
+
+.eyeIcon:hover {
+	cursor: pointer;
+}

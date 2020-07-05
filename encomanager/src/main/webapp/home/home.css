@@ -1,17 +1,23 @@
-html,body {
-	width: 100%;
-	height: 100%;
-}
-
-.leftSideBarStyle {
+/*Estilos da expansão do leftSideNav*/
+.leftSideBarStyleClose {
 	background-color: #029BFD;
 	width: 5vw;
 	height: 100vh;
 }
 
+.leftSideBarStyleOpen {
+	background-color: #029BFD;
+	width: 22vw;
+	height: 100vh;
+}
+
 @media screen and (max-width: 800px) {
-	.leftSideBarStyle {
-		width: 10vw;		
+	.leftSideBarStyleClose {
+		width: 12vw;		
+	}
+
+	.leftSideBarStyleOpen {
+		width: 35vw;
 	}
 }
 
@@ -19,13 +25,83 @@ html,body {
 	cursor: pointer;
 }
 
-#iconeExpancao {
-	position: absolute;
-    top: 45%;
-    right: 0%;
-    padding-right: 4px;
+.divIconeExpansaoClose {
+	margin-top: 44vh;
+	height: 45px;
+	cursor: pointer;
+	background-color: #029BFD;
 }
 
-#iconeExpancao:hover {
+.divIconeExpansaoOpen {
+	position: absolute;
+	margin-top: 44vh;
+	height: 45px;
+	width: 20px;
+	border-top-right-radius: 7px;
+	border-bottom-right-radius:7px;
 	cursor: pointer;
+	background-color: #029BFD;
+}
+
+.iconeExpansao {
+	margin: 14px 6px 0px 4px;
+}
+
+/*Estilos do menu das telas*/
+.list-group {
+	color: white;
+}
+
+.list-group-item {
+	padding: 0px;
+	background-color: #0082d3;
+	border-left: none;
+	border-right: none;
+}
+
+.itemTela {
+	background-color: #005b93;
+	color: white;
+	font-size: 0.95em;
+}
+
+.itemTela:hover {
+	background-color: #003b5e;
+	color: white;
+}
+
+.nomeTela {
+	margin-left: 4px;
+}
+
+.list-group-item:first-child {
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+}
+
+.list-group-item:last-child {
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+.spanTitleTelas {
+	color: white;
+	width: 100%;
+	display: inline-block;
+	text-align: center;
+	font-size: 1.3em;
+}
+
+.spanGrupoTela {
+	width: 100%;
+    display: inline-block;
+    padding: 2px 0px 4px 0px;
+}
+
+.spanGrupoTela:hover {
+    background-color: #003b5e;
+}
+
+.iconSpanGrupoTela {
+	margin: 0px 4px;
 }

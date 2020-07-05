@@ -1,0 +1,30 @@
+{
+    "grupos": [
+        {
+            "nome": "ENCOMENDAS", 
+            "iconeClass": "fa-boxes", 
+            "telas": [
+                {"nomeTela": "Gerar encomenda", "tagetLink": "/encomanger/telas/gerarEncomenda/gerarEncomenda.jsp"},
+                {"nomeTela": "Agenda de encomendas", "tagetLink": "/encomanger/telas/agendaEncomendas/agendaEncomendas.jsp"},
+                {"nomeTela": "Produtos", "tagetLink": "/encomanger/telas/produtos/produtos.jsp"},
+                {"nomeTela": "Vendas", "tagetLink": "/encomanger/telas/vendas/vendas.jsp"}
+            ]
+        },
+        {
+            "nome": "PESSOAS", 
+            "iconeClass": "fa-users", 
+            "telas": [
+                {"nomeTela": "Clientes", "tagetLink": "/encomanger/telas/clientes/clientes.jsp"},
+                {"nomeTela": "Usuários", "tagetLink": "/encomanger/telas/usuarios/usuarios.jsp"}	
+            ]
+        },
+        {
+            "nome": "ADMINISTRAÇÃO", 
+            "iconeClass": "fa-cogs", 
+            "telas": [
+                {"nomeTela": "Tipo de usuário e acessos", "tagetLink": "/encomanger/telas/tipoUsuarioAcessos/tipoUsuarioAcessos.jsp"},
+                {"nomeTela": "Parâmetros", "tagetLink": "/encomanger/telas/parametros/parametros.jsp"}
+            ]
+        }
+    ]
+}

@@ -9,7 +9,7 @@
 		
 		<!-- Libs -->
 		<link href="${pageContext.request.contextPath}/resources/bootstrap/bootstrap.min.css" rel="stylesheet">
-		<link href="${pageContext.request.contextPath}/resources/fontawesome/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+		<link href="${pageContext.request.contextPath}/resources/fontawesome/font-awesome-5.13.1/css/all.css" rel="stylesheet">
 		<script src="${pageContext.request.contextPath}/resources/bootstrap/bootstrap.min.js"></script>
 		<script src="${pageContext.request.contextPath}/resources/jquery/jquery-3.4.1.min.js"></script>
 		
