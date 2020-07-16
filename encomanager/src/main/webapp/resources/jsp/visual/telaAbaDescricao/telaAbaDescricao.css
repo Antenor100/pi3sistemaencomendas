@@ -1,0 +1,26 @@
+.geral {
+   margin: 0px;
+   padding: 0px;
+   height: 100vh;
+   border: 3px solid;
+   border-top: none;
+}
+
+.header {
+	height: 30px;
+	color: white;
+	font-size: 1.2em;
+}
+
+.divIcons {
+	display: flex;
+    align-items: center;
+    right: 0px;
+    position: absolute;
+    height: 100%;
+    font-size: 16px
+}
+
+.divIcons .fa-times{
+    font-size: 20px;
+}
