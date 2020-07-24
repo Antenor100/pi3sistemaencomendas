@@ -39,7 +39,7 @@
     	</script>
 	</head>
 	
-	<body onresize="changeSideNavArrowPosition()">
+	<body onresize="changeSideNavArrowPosition()" style="overflow: hidden">
 		<div class="container-fluid m-0 p-0">
 			<div class="row m-0 p-0">
 			
@@ -47,7 +47,7 @@
 				<div id="leftSideNav" class="leftSideBarStyleClose d-flex flex-column">
 					<!-- Home icon -->
 					<div class="justify-content-center">
-						<div class="p-2 d-flex align-items-center" style="height: 10vh;">
+						<div class="p-2 d-flex align-items-center" style="height: 12vh;">
 							<a id="linkHome" href="${pageContext.request.contextPath}/home/home.jsp">
 								<img id="logoHomeSideNav" class="img-fluid logoHome" alt="Logo Encomanager" src="${pageContext.request.contextPath}/resources/imagens/iconebrancosemfundo.png">
 							</a>
@@ -59,7 +59,7 @@
 							<!-- Informações e usabilidade -->
 							<div id="sideNavContent" class="col-7 p-0 d-flex overflow-auto" style="visibility: hidden">
 								<div class="container flex-grow-1">
-									<div id="rowVerticalNav" class="row mt-4">
+									<div id="rowVerticalNav" class="row flex-wrap mt-4">
 										<span class="spanTitleTelas">TELAS</span>
 										<div class="list-group flex-fill">
 											<div class="list-group-item" onclick="habilitaTelasGrupo('grupo1')">

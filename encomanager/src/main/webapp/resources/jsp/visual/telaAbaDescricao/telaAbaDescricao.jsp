@@ -2,7 +2,7 @@
 <link href="${pageContext.request.contextPath}/resources/jsp/visual/telaAbaDescricao/telaAbaDescricao.css" type="text/css" rel="stylesheet">
 
 <div id="divTelaAbaDescricao" class="container-fluid border-2 border-primary geral">
-	<div class="row m-0">
+	<div class="row d-flex flex-nowrap m-0">
 		<div class="col-12 bg-primary header d-flex justify-content-center">
 			<span id="telaTitulo"></span>
 			<script type="text/javascript">
@@ -12,15 +12,18 @@
 			
 			<!-- Icones do canto -->
 			<div class="divIcons">
+				
 				<!-- Btn help -->
-				<div data-toggle="modal" data-target="#helpModal">
+				<div id="btnHelp">
 					<i class="fa fa-question mr-3" data-toggle="tooltip" data-placement="bottom" title="Ajuda"></i>
 				</div>
 				
-				<!-- set modal properties-->
-				<script type="text/javascript">
-					var modalProperties = {
-							id: "helpModal",
+				<!-- Importa fonte do modal, seta propriedades e cria novo modal no click do botão -->
+				<script src="${pageContext.request.contextPath}/resources/js/visual/modal.js" type="text/javascript"></script>
+				<script type="text/javascript">	
+					document.getElementById("btnHelp").addEventListener("click", function() {
+						novoModal({
+							idModalParent: "divTelaAbaDescricao",
 							title: "Informações da tela " + telaAbaDescricaoProperties.telaTitle,
 							body: telaAbaDescricaoProperties.ajudaModalBody,
 							okFunction: undefined,
@@ -28,12 +31,11 @@
 							showBtnOk: false,
 							btnOkLabel: "",
 							showBtnCancel: true,
-							btnCancelLabel: "Fechar"
-					}
+							btnCancelLabel: "Fechar",
+							closeOnOK: true
+						});
+					});
 				</script>
-				
-				<!-- import modal -->
-				<jsp:include page="/resources/jsp/visual/modal/modal.jsp"/>
 				
 				<!-- Btn close -->
 				<script type="text/javascript">

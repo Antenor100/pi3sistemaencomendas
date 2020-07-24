@@ -24,3 +24,8 @@
 .divIcons .fa-times{
     font-size: 20px;
 }
+
+/*NECESSÁRIO PARA NÃO BUGAR O CONTEUDO DA TELA*/
+.row{
+	flex-wrap: nowrap;
+}

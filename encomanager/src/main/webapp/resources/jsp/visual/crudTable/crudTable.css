@@ -1,11 +1,11 @@
 .divGeral {
-    border: 1px solid blue;
+    border: 1px solid #029BFD;
     padding: 15px;
 }
 
-.divCrudTableHeader {
+/*.divCrudTableHeader {
     display: flex;
-}
+}*/
 
 .divCrudTableHeader div {
     padding: 0px;
@@ -30,5 +30,29 @@
     border: 1px solid gray;
 }
 
+@media screen and (max-width: 600px) {
+	.divTable {
+		width: 73vw;		
+	}
+}
+
+.selectedRow {
+    background-color: #67c0f7;
+    border-color: #67c0f7;
+}
+
+.selectedRow:hover {
+    background-color: #67c0f7 !important;
+}
 
 
+.noSelectedRow {
+    background-color: none;
+}
+
+.tableDivAlert {
+    color: red;
+    text-align: center;
+    width: 100%;
+    margin: 10px 0px;
+}

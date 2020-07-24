@@ -20,6 +20,8 @@
 					columns: ["idusu", "nomeusu", "senhausu", "emailusu", "tipoUsu"],
 					columnsDescricao: ["Código", "Nome", "Senha", "Email", "Desc. Tipo Usuário"],
 					columnsDataType: ["integer", "text", "text", "password", "text"],
+					pkField: "idusu",
+					descriptionField: "nomeusu",
 					registros: [
 						["1", "antenor", "1324", "antenor@gmail.com", "Gerente"],
 						["2", "meire", "4321", "meire@gmail.com", "Administrador"],
