@@ -65,23 +65,23 @@
 											<div class="list-group-item" onclick="habilitaTelasGrupo('grupo1')">
 												<span class="spanGrupoTela"><i class="fa fa-boxes iconSpanGrupoTela"></i>ENCOMENDAS</span>
 												<div id="grupo1" class="list-group" style="display: none">
-													<a class="list-group-item itemTela" onclick="novaTelaAcessadaAdd(this)" href="#"><span class="nomeTela">Gerar encomenda</span></a>
-													<a class="list-group-item itemTela" onclick="novaTelaAcessadaAdd(this)" href="#"><span class="nomeTela">Agenda de encomendas</span></a>
-													<a class="list-group-item itemTela" onclick="novaTelaAcessadaAdd(this)" href="#"><span class="nomeTela">Produtos</span></a>
-													<a class="list-group-item itemTela" onclick="novaTelaAcessadaAdd(this)" href="#"><span class="nomeTela">Vendas</span></a>
+													<a class="list-group-item itemTela" onclick="novaTelaAcessadaAdd(this)" href="/encomanager/telas/gerarEncomenda/gerarEncomenda.jsp"><span class="nomeTela">Gerar encomenda</span></a>
+													<a class="list-group-item itemTela" onclick="novaTelaAcessadaAdd(this)" href="/encomanager/telas/agendaEncomendas/agendaEncomendas.jsp"><span class="nomeTela">Agenda de encomendas</span></a>
+													<a class="list-group-item itemTela" onclick="novaTelaAcessadaAdd(this)" href="/encomanager/telas/produtos/produtos.jsp"><span class="nomeTela">Produtos</span></a>
+													<a class="list-group-item itemTela" onclick="novaTelaAcessadaAdd(this)" href="/encomanager/telas/vendas/vendas.jsp"><span class="nomeTela">Vendas</span></a>
 												</div>
 											</div>		
 											<div class="list-group-item" onclick="habilitaTelasGrupo('grupo2')">
 												<span class="spanGrupoTela"><i class="fa fa-users iconSpanGrupoTela"></i>PESSOAS</span>
 												<div id="grupo2" class="list-group" style="display: none">
-													<a class="list-group-item itemTela" onclick="novaTelaAcessadaAdd(this)" href="#"><span class="nomeTela">Clientes</span></a>
+													<a class="list-group-item itemTela" onclick="novaTelaAcessadaAdd(this)" href="/encomanager/telas/clientes/clientes.jsp"><span class="nomeTela">Clientes</span></a>
 													<a class="list-group-item itemTela" onclick="novaTelaAcessadaAdd(this)" href="/encomanager/telas/usuarios/usuarios.jsp"><span class="nomeTela">Usuários</span></a>
 												</div>
 											</div>
 											<div class="list-group-item" onclick="habilitaTelasGrupo('grupo3')">
 												<span class="spanGrupoTela"><i class="fa fa-cogs iconSpanGrupoTela"></i>ADMINISTRAÇÃO</span>
 												<div id="grupo3" class="list-group" style="display: none">
-													<a class="list-group-item itemTela" onclick="novaTelaAcessadaAdd(this)" href="#"><span class="nomeTela">Tipo de usuário e acessos</span></a>
+													<a class="list-group-item itemTela" onclick="novaTelaAcessadaAdd(this)" href="/encomanager/telas/tipoUsuarioAcesso/tipoUsuarioAcesso.jsp"><span class="nomeTela">Tipo de usuário e acessos</span></a>
 													<a class="list-group-item itemTela" onclick="novaTelaAcessadaAdd(this)" href="/encomanager/telas/parametros/parametros.jsp"><span class="nomeTela">Parâmetros</span></a>
 												</div>
 											</div>

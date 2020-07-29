@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.29, for Win64 (x86_64)
 --
--- Host: localhost    Database: encomanager
+-- Host: localhost    Database: ENCOMANAGER
 -- ------------------------------------------------------
 -- Server version	5.7.29-log
 
@@ -105,7 +105,7 @@ CREATE TABLE `tcepro` (
 
 LOCK TABLES `tcepro` WRITE;
 /*!40000 ALTER TABLE `tcepro` DISABLE KEYS */;
-INSERT INTO `tcepro` VALUES (1,'Bolo de chocolate','Bolo com massa de chocolate e cobertura de chocolate',75.50,'KG',120),(2,'Pão de queijo',NULL,8.50,'KG',45),(3,'Pão francês',NULL,5.00,'KG',60),(4,'Coxinha pequena','Coxinha com massa de batata, 5cm de altura',20.00,'KG',140),(5,'Coxinha média','Coxinha com massa de batata, 7cm de altura',20.00,'KG',160),(6,'Coxinha grande','Coxinha com massa de batata, 10cm de altura',20.00,'KG',180);
+INSERT INTO `tcepro` VALUES (1,'Bolo de chocolate','Bolo com massa de chocolate e cobertura de chocolate',75.50,'KG',120),(2,'PÃ£o de queijo','pÃ£o de queijo do dia',8.50,'KG',45),(3,'Pão francês',NULL,5.00,'KG',60),(4,'Coxinha pequena','Coxinha com massa de batata, 5cm de altura',20.00,'KG',140),(5,'Coxinha média','Coxinha com massa de batata, 7cm de altura',20.00,'KG',160),(6,'Coxinha grande','Coxinha com massa de batata, 10cm de altura',20.00,'KG',180);
 /*!40000 ALTER TABLE `tcepro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -225,12 +225,13 @@ DROP TABLE IF EXISTS `tgcpar`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tgcpar` (
-  `PARNOME` varchar(20) DEFAULT NULL,
+  `PARNOME` varchar(20) NOT NULL,
   `PARTIPO` char(1) DEFAULT NULL,
   `PARDESCRICAO` varchar(60) DEFAULT NULL,
   `PARVALOR` varchar(30) DEFAULT NULL,
   `PARULTIMAALTER` datetime DEFAULT NULL,
   `PARCODIGOUSUULTIMAALTER` int(11) DEFAULT NULL,
+  PRIMARY KEY (`PARNOME`),
   KEY `PARCODIGOUSUULTIMAALTER` (`PARCODIGOUSUULTIMAALTER`),
   CONSTRAINT `tgcpar_ibfk_1` FOREIGN KEY (`PARCODIGOUSUULTIMAALTER`) REFERENCES `tgpusu` (`USUCODIGO`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -242,7 +243,7 @@ CREATE TABLE `tgcpar` (
 
 LOCK TABLES `tgcpar` WRITE;
 /*!40000 ALTER TABLE `tgcpar` DISABLE KEYS */;
-INSERT INTO `tgcpar` VALUES ('MINUTOSERVDIARIO','I','Valor em minutos do tempo de serviço por funcionario','300','2020-06-21 00:00:00',2);
+INSERT INTO `tgcpar` VALUES ('MINUTOSERVDIARIO','I','Valor em minutos do tempo de serviço por funcionario','300','2020-07-28 00:00:00',2);
 /*!40000 ALTER TABLE `tgcpar` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -287,7 +288,7 @@ CREATE TABLE `tgpcli` (
   `CLICNPJ` char(14) DEFAULT NULL,
   `CLIENDERECO` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`CLICODIGO`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -296,7 +297,7 @@ CREATE TABLE `tgpcli` (
 
 LOCK TABLES `tgpcli` WRITE;
 /*!40000 ALTER TABLE `tgpcli` DISABLE KEYS */;
-INSERT INTO `tgpcli` VALUES (1,'Thiago','thiago@gmail.com','34995624587',NULL,'41258965478',NULL,'av teste 1, nº200, uberlândia'),(2,'Antenor','antenor@gmail.com','34965847541','3447589562','78452136584',NULL,'av rondon pacheco, nº405, uberlândia'),(3,'soft company','softcompany@gmail.com','39985475632','3452145874',NULL,'44336645000175','av castelo branco, nº580, uberlândia');
+INSERT INTO `tgpcli` VALUES (1,'Thiago','thiago@gmail.com','34995624587',NULL,'41258965478',NULL,'av teste 1, nº200, uberlândia'),(2,'Antenor','antenor@gmail.com','34965847541','3447589562','78452136584',NULL,'av rondon pacheco, nº405, uberlândia'),(3,'soft company','softcompany@gmail.com','39985475632','3452145874',NULL,'44336645000175','av castelo branco, nº580, uberlândia'),(4,'empresa teste','empreteste@teste.com','','3441564251','','41256325000154','endereco teste');
 /*!40000 ALTER TABLE `tgpcli` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -316,7 +317,7 @@ CREATE TABLE `tgpusu` (
   PRIMARY KEY (`USUCODIGO`),
   KEY `USUCODIGOTUS` (`USUCODIGOTUS`),
   CONSTRAINT `tgpusu_ibfk_1` FOREIGN KEY (`USUCODIGOTUS`) REFERENCES `tgctus` (`TUSCODIGO`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -325,7 +326,7 @@ CREATE TABLE `tgpusu` (
 
 LOCK TABLES `tgpusu` WRITE;
 /*!40000 ALTER TABLE `tgpusu` DISABLE KEYS */;
-INSERT INTO `tgpusu` VALUES (2,'antenor',1,'827ccb0eea8a706c4c34a16891f84e7b','antenor@gmail.com');
+INSERT INTO `tgpusu` VALUES (2,'antenor',1,'827ccb0eea8a706c4c34a16891f84e7b','antenor@gmail.com'),(19,'bia',1,'e10adc3949ba59abbe56e057f20f883e','bia@teste.com'),(21,'meire',1,'fcea920f7412b5da7be0cf42b8c93759','meire@gmail.com'),(24,'andreia',1,'6ebe76c9fb411be97b3b0d48b791a7c9','andreia@hotmail.com'),(25,'miguel',1,'d553d148479a268914cecb77b2b88e6a','miguel@gmail.com');
 /*!40000 ALTER TABLE `tgpusu` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -338,4 +339,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-03 19:30:30
+-- Dump completed on 2020-07-29  1:32:06

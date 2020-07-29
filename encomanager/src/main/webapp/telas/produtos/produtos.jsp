@@ -9,8 +9,8 @@
 	<div id="content">
 		<script type="text/javascript">
 		var telaAbaDescricaoProperties = {
-			telaTitle: "Usuários",
-			ajudaModalBody: "Essa tela é destinada para a criação de usuários."
+			telaTitle: "Produtos",
+			ajudaModalBody: "Essa tela é destinada para a criação de produtos."
 		};
 		</script>
 		<jsp:include page="/resources/jsp/visual/telaAbaDescricao/telaAbaDescricao.jsp"/>	
@@ -18,19 +18,19 @@
 		<div id="contentTela" class="row p-0 m-3">
 			<script type="text/javascript">
 				<%!
-					String tableName = "TGPUSU";
-					String[] columnsDescricao = new String[] {"Código", "Nome", "Código Tipo Usuário", "Senha", "Email"};
-					String[] columnsDataType = new String[] {"number", "text", "number", "password", "email"};
-					String pkField = "USUCODIGO";
-					String servletClassName = "/UsuariosServlet";
-					String jspName = "/telas/usuarios/usuarios.jsp";
+					String tableName = "TCEPRO";
+					String[] columnsDescricao = new String[] {"Código", "Nome", "Descrição", "Valor", "Especificação de Unid.", "Gasto minutos de serviço"};
+					String[] columnsDataType = new String[] {"number", "text", "text", "number", "text", "number"};
+					String pkField = "PROCODIGO";
+					String servletClassName = "/CrudServlet";
+					String jspName = "/telas/produtos/produtos.jsp";
 					String pkFieldIsText = "false";
 					
 					CrudTableBO ctb = new CrudTableBO(tableName, columnsDescricao, columnsDataType, pkField, servletClassName, jspName, pkFieldIsText);	
 				%>
 				
 				var tableObject = <%=ctb.getInitialJson()%>
-					
+				
 				tableObject.contextPath = "<%=pageContext.getServletContext().getContextPath()%>";
 						
 				var erroService = `<%=(String) request.getAttribute("erro")%>`;

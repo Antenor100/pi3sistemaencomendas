@@ -1,7 +1,27 @@
-/* FUNCOES DA TABLE */
-var selectRowElement = undefined;
+/* 
+	CRUDTABLE
+	
+	var tableObject = {
+					tableName: "TGPUSU",
+					columns: ["idusu", "nomeusu", "senhausu", "emailusu", "tipoUsu"],
+					columnsDescricao: ["Código", "Nome", "Senha", "Email", "Desc. Tipo Usuário"],
+					columnsDataType: ["integer", "text", "text", "password", "text"],
+					servletClassName: "ClasseServlet.java",
+					contextPath: "encomanager/",
+					pkField: "idusu",
+					values: [
+						["1", "antenor", "1324", "antenor@gmail.com", "Gerente"],
+						["2", "meire", "4321", "meire@gmail.com", "Administrador"],
+						["3", "caua", "6548", "caua@gmail.com", "Produção"],
+						["4", "miguel", "7894", "miguel@gmail.com", ""],
+					]
+				};
+*/
 
-function populaTabela(filterValue) {
+/* FUNCOES DA TABLE */
+var selectedRowElement = undefined;
+
+function populaTabela(filterValue, descriptionFieldfilterOption) {
 	//Adiciona nova coluna no header da tabela, caso exista não faz nada
 	let tableHeadElement = document.getElementById("tableHeadRow");
 
@@ -21,9 +41,9 @@ function populaTabela(filterValue) {
 		tableBody.innerHTML = "";
 	}
 
-	if (tableObject.registros.length > 0) {
-		tableObject.registros.forEach((row) => {
-			let insereLinha = filtraRegistro(row, filterValue);
+	if (tableObject.values.length > 0) {
+		tableObject.values.forEach((row) => {
+			let insereLinha = filtraRegistro(row, filterValue, descriptionFieldfilterOption);
 
 			if (insereLinha) {
 				let newTr = document.createElement("tr");
@@ -65,41 +85,80 @@ function populaTabela(filterValue) {
 };
 
 //Retorna se deve inserir a linha ou não, dependendo do valor contido no campo de filtro.
-function filtraRegistro(row, filterValue) {
-	if (filterValue != undefined) {
-		let indexPk = tableObject.columns.indexOf(tableObject.pkField);
-		let indexDescription = tableObject.columns.indexOf(tableObject.descriptionField);
+function filtraRegistro(row, filterValue, descriptionFieldfilterOption) {
+	if (filterValue != undefined && filterValue != "") {
+		let indexDescription = tableObject.columnsDescricao.indexOf(descriptionFieldfilterOption);
 
-		if (row[indexPk] == filterValue || row[indexDescription].includes(filterValue)) {
-			return true;
+		let primeiroValor = row[indexDescription];
+		let segundoValor = filterValue;
+		
+		if (typeof(primeiroValor) == "text") {
+			primeiroValor = primeiroValor.toLocaleLowerCase();
 		}
-	
+		
+		if (typeof(segundoValor) == "text") {
+			segundoValor = segundoValor.toLocaleLowerCase();
+		
+			if (indexDescription != -1 && primeiroValor.includes(segundoValor)) {
+				return true;
+			}
+			
+		} else if (typeof(row[indexDescription]) == "number") {
+			segundoValor = new Number(segundoValor);
+			
+			if (indexDescription != -1 && primeiroValor == segundoValor) {
+				return true;
+			}
+		}
+
 		return false;
 	}
 
 	return true;
 }
 
-//Troca classes de estilo e seta o valor da variavel selectRowElement com o elemento da linha selecionada
+//Popula select tag com todos os possiveis campos de busca.
+function populaFilterSelect() {
+	let selectTagElement = document.getElementById("filterOptions");
+
+	let optionElementDefault = document.createElement("option");
+	optionElementDefault.innerHTML = "Campo à filtrar";
+	optionElementDefault.setAttribute("selected", "");
+	selectTagElement.appendChild(optionElementDefault);
+
+	tableObject.columnsDescricao.forEach(descricao => {
+		let optionElement = document.createElement("option");
+		optionElement.innerHTML = descricao;
+		selectTagElement.appendChild(optionElement);
+	});
+}
+
+//Troca classes de estilo e seta o valor da variavel selectedRowElement com o elemento da linha selecionada
 function selectNewRow(element) {
-	if (selectRowElement != undefined) {
-		selectRowElement.setAttribute("class", selectRowElement.getAttribute("class").replace("selectedRow", "noSelectedRow"));
+	if (selectedRowElement != undefined) {
+		selectedRowElement.setAttribute("class", selectedRowElement.getAttribute("class").replace("selectedRow", "noSelectedRow"));
 	}
 
-	if (selectRowElement == element) {
-		selectRowElement.setAttribute("class", selectRowElement.getAttribute("class").replace("selectedRow", "noSelectedRow"));
-		selectRowElement = undefined;
+	if (selectedRowElement == element) {
+		selectedRowElement.setAttribute("class", selectedRowElement.getAttribute("class").replace("selectedRow", "noSelectedRow"));
+		selectedRowElement = undefined;
 		return;
 	}
 
-	selectRowElement = element;
+	selectedRowElement = element;
 
-	selectRowElement.setAttribute("class", selectRowElement.getAttribute("class").replace("noSelectedRow", "selectedRow"));
+	selectedRowElement.setAttribute("class", selectedRowElement.getAttribute("class").replace("noSelectedRow", "selectedRow"));
 }
 
 function vinculaListenerOnFilter() {
 	document.getElementById("filtroInput").addEventListener('input', function() {
-		populaTabela(this.value);
+		let opcaoCampoFilter = document.getElementById("filterOptions").value;
+		populaTabela(this.value, opcaoCampoFilter);
+	});
+
+	document.getElementById("filterOptions").addEventListener('change', function() {
+		let filterInputValue = document.getElementById("filtroInput").value;
+		populaTabela(filterInputValue, this.value);
 	});
 }
 
@@ -107,56 +166,197 @@ function vinculaListenerOnFilter() {
 var modalProperties = undefined;
 
 function adicionar() {
-	modalProperties = {
-		id: "adicionarRegistroModal",
+	novoModal({
+		idModalParent: "divModals",
 		title: "Adicionar novo registro",
-		body: adicionarModalBodyElement,
-		okFunction: undefined,
+		body: createFormWithSelectedRowFields(false),
+		okFunction: addEventListerToOKButton("create"),
 		cancelFunction: undefined,
 		showBtnOk: true,
-		btnOkLabel: "Confirmar",
+		btnOkLabel: "Adicionar",
 		showBtnCancel: true,
-		btnCancelLabel: "Cancelar"
-	}
-
-	var adicionarModalBodyElement = "a";
-	$('#adicionarRegistroModal').modal('show');
+		btnCancelLabel: "Cancelar",
+		closeOnOK: true
+	});
 }				
 
 function remover() {
-	modalProperties = {
-		id: "removerRegistroModal",
+	if (selectedRowElement == undefined) {
+		confirm("Para remover um registro é necessário seleciona-lo na tabela!");	
+		return;
+	}
+	
+	let indexPkField = tableObject.columns.indexOf(tableObject.pkField);
+	let descricaoPkField = tableObject.columnsDescricao[indexPkField];
+	let valorPkField = selectedRowElement.children[indexPkField].innerHTML;
+	
+	novoModal({
+		idModalParent: "divModals",
 		title: "Remover registro selecionado",
-		body: removerModalBodyElement,
-		okFunction: undefined,
+		body: createFormWithSelectedRowFields(true, true, `Deseja realmente remover o registro de '${descricaoPkField} = ${valorPkField}' da base de dados?`),
+		okFunction: addEventListerToOKButton("delete"),
 		cancelFunction: undefined,
 		showBtnOk: true,
-		btnOkLabel: "Confirmar",
+		btnOkLabel: "Remover",
 		showBtnCancel: true,
-		btnCancelLabel: "Cancelar"
-	}
-
-	var removerModalBodyElement = "b";
-	$('#removerRegistroModal').modal('show');
+		btnCancelLabel: "Cancelar",
+		closeOnOK: true
+	});
 }
 
 function editar() {
-	modalProperties = {
-		id: "editarRegistroModal",
-		title: "Editar registro selecionado",
-		body: editarModalBodyElement,
-		okFunction: undefined,
-		cancelFunction: undefined,
-		showBtnOk: true,
-		btnOkLabel: "Confirmar",
-		showBtnCancel: true,
-		btnCancelLabel: "Cancelar"
+	if (selectedRowElement == undefined) {
+		confirm("Para editar um registro é necessário seleciona-lo na tabela!");	
+		return;
 	}
 
-	var editarModalBodyElement = "c";
-	$('#editarRegistroModal').modal('show');
+	novoModal({
+		idModalParent: "divModals",
+		title: "Editar registro selecionado",
+		body: createFormWithSelectedRowFields(true),
+		okFunction: addEventListerToOKButton("update"),
+		cancelFunction: undefined,
+		showBtnOk: true,
+		btnOkLabel: "Editar",
+		showBtnCancel: true,
+		btnCancelLabel: "Cancelar",
+		closeOnOK: true
+	});
 }
 
 function recarregar() {
+	document.location.reload(true);
+}
 
+function createFormWithSelectedRowFields(ehEdicao, ehRemocao = false, msg = undefined) {
+	let formElement = document.createElement("form");
+	formElement.setAttribute("id", `formId`);
+	formElement.setAttribute("action", tableObject.contextPath + tableObject.servletClassName);
+	formElement.setAttribute("method", "post");
+
+	if (!ehRemocao) {
+		let arrayIteracaoCampos;
+
+		if (ehEdicao) {
+			if (selectedRowElement.children != undefined) {
+				arrayIteracaoCampos = selectedRowElement.children;
+			}
+		} else {
+			arrayIteracaoCampos = tableObject.columns;
+		}
+
+		for (let i = 0; i < arrayIteracaoCampos.length; i++) {
+			//Implementação para não apresentar o campo Pk da grid nos forms de adicionar e edição
+			if (tableObject.columns[i] == tableObject.pkField) continue; 
+
+			let divFormGroup = document.createElement("div");
+			divFormGroup.setAttribute("class", "form-group");
+
+			let labelInputField = document.createElement("label");
+			labelInputField.setAttribute("for", `input${i}`);
+			labelInputField.innerHTML = tableObject.columnsDescricao[i];
+
+			let inputRowChild = document.createElement("input");
+			inputRowChild.setAttribute("id", `input${i}`);
+			inputRowChild.setAttribute("name", tableObject.columns[i]);
+			inputRowChild.setAttribute("type", tableObject.columnsDataType[i]);
+			inputRowChild.setAttribute("class", "form-control text-center");
+			inputRowChild.setAttribute("value", (ehEdicao) ? arrayIteracaoCampos[i].innerHTML : "");
+			
+			divFormGroup.appendChild(labelInputField);
+			divFormGroup.appendChild(inputRowChild);
+
+			formElement.appendChild(divFormGroup);
+		}
+
+	} else {
+		formElement.innerHTML = msg;
+	}
+
+	return formElement;
+}
+
+function okFunctionBase(operacao) {
+	let formElement = document.getElementById("formId");
+	
+	if (formElement != undefined) {
+
+		let jsonRequest = {
+			crudTipoOperacao: operacao,
+			tableName: tableObject.tableName,
+			fieldsName: [],
+			fieldsValue: [],
+			fieldsDataType: [],
+			pkFieldName: undefined,
+			pkFieldValue: undefined,
+			pkFieldIsText: tableObject.pkFieldIsText
+		}
+
+		let filhosForm = formElement.children;
+
+		for (let i = 0; i < filhosForm.length; i++) {
+			if (filhosForm[i].children[1].getAttribute("id").includes("input")) {
+				jsonRequest.fieldsName.push(filhosForm[i].children[1].getAttribute("name"));
+				jsonRequest.fieldsValue.push(filhosForm[i].children[1].value);
+				jsonRequest.fieldsDataType.push(tableObject.columnsDataType[tableObject.columns.indexOf(filhosForm[i].children[1].getAttribute("name"))]);
+			}
+		}
+	
+		//caso não for create a pk deve ser setada nos atributos
+		if (operacao != "create") {
+			jsonRequest.pkFieldName = tableObject.pkField
+			jsonRequest.pkFieldValue = getSelectedRowPkValue();		
+		}
+	
+		let inputWithJson = document.createElement("input");
+		inputWithJson.setAttribute("name", "inputWithJson");
+		inputWithJson.setAttribute("value", JSON.stringify(jsonRequest));
+		inputWithJson.setAttribute("style", "display: none");
+		formElement.appendChild(inputWithJson);
+		
+		let jspName = document.createElement("input");
+		jspName.setAttribute("name", "jspName");
+		jspName.setAttribute("value", tableObject.jspName);
+		jspName.setAttribute("style", "display: none");
+		formElement.appendChild(jspName);
+
+		document.getElementById("formId").submit();
+	}
+};
+
+function getSelectedRowPkValue() {
+	let iteracaoSelectedRow = selectedRowElement.children;
+
+	for (let i = 0; i < iteracaoSelectedRow.length; i++) {
+		if (tableObject.columns[i] == tableObject.pkField) {
+			return iteracaoSelectedRow[i].innerHTML;
+		}
+	}
+}
+
+function addEventListerToOKButton(operacao) {
+	setTimeout(() => {
+		document.getElementById("okButton").addEventListener("click", () => {okFunctionBase(operacao)});
+	}, 50);
+}
+
+function desvinculaBotoes() {
+	let showBtnAdd = tableObject.mostraBotaoAdicionar;
+	let showBtnRemove = tableObject.mostraBotaoRemover;
+	let showBtnEdit = tableObject.mostraBotaoEditar;
+	
+	if (showBtnAdd != undefined && !showBtnAdd) {
+		let btnElement = document.getElementById("btnAdicionar");
+		btnElement.remove();
+	}
+	
+	if (showBtnEdit != undefined && !showBtnEdit) {
+		let btnElement = document.getElementById("btnEditar");
+		btnElement.remove();
+	}
+	
+	if (showBtnRemove != undefined && !showBtnRemove) {
+		let btnElement = document.getElementById("btnRemover");
+		btnElement.remove();
+	}
 }

@@ -22,45 +22,53 @@ public class ValidaLogin extends HttpServlet {
 	private String passwordValue;
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		this.userValue = request.getParameter("inputUsuarioValue");
-		this.passwordValue = request.getParameter("inputSenhaValue");
-		
-		DBM dbm = new DBM(MySqlConnector.abreConexao());
-		
-		List<Registro> query = dbm.select("SELECT USUNOME,USUSENHA FROM TGPUSU WHERE USUNOME = '?'", new Object[] {this.userValue});
-		
-		if (query.size() == 0) {
-			request.setAttribute("erro", "usuario");
+		try {
+			this.userValue = request.getParameter("inputUsuarioValue");
+			this.passwordValue = request.getParameter("inputSenhaValue");
 			
-			this.returnFormValues(request);
+			DBM dbm = new DBM(MySqlConnector.abreConexao());
 			
-			request.getRequestDispatcher("/login/login.jsp").forward(request, response);
-		
-		} else {
-			for (Registro registro : query) {
-				String registroSenha = registro.getColumnAsString("USUSENHA");
+			List<Registro> query = dbm.select("SELECT USUNOME,USUSENHA FROM TGPUSU WHERE USUNOME = '?'", new Object[] {this.userValue});
+			
+			if (query.size() == 0) {
+				request.setAttribute("erro", "usuario");
 				
-				String criptPasswordValue = null;
+				this.returnFormValues(request);
 				
-				try {
-					criptPasswordValue = Criptografia.criptografar(this.passwordValue);
-					
-				} catch (NoSuchAlgorithmException e) {
-					e.printStackTrace();
-				}
+				request.getRequestDispatcher("/login/login.jsp").forward(request, response);
 				
-				if (criptPasswordValue.equals(registroSenha)) {
-					request.getRequestDispatcher("/home/home.jsp").forward(request, response);
+			} else {
+				for (Registro registro : query) {
+					String registroSenha = registro.getColumnAsString("USUSENHA");
 					
-				} else {
-					request.setAttribute("erro", "senha");
+					String criptPasswordValue = null;
 					
-					this.returnFormValues(request);
+					try {
+						criptPasswordValue = Criptografia.criptografar(this.passwordValue);
+						
+					} catch (NoSuchAlgorithmException e) {
+						e.printStackTrace();
+					}
 					
-					request.getRequestDispatcher("/login/login.jsp").forward(request, response);
-				}
+					if (criptPasswordValue.equals(registroSenha)) {
+						request.getRequestDispatcher("/home/home.jsp").forward(request, response);
+						
+					} else {
+						request.setAttribute("erro", "senha");
+						
+						this.returnFormValues(request);
+						
+						request.getRequestDispatcher("/login/login.jsp").forward(request, response);
+					}
+				}	
 			}	
-		}	
+			
+			MySqlConnector.fecharConexao();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	private void returnFormValues(HttpServletRequest request) {

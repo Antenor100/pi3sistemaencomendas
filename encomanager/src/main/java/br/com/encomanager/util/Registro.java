@@ -1,13 +1,39 @@
 package br.com.encomanager.util;
 
+import org.json.JSONObject;
+
 public class Registro {
 
 	private String[] columns;
 	private Object[] values;
-	
-	public Registro(String[] columns, Object[] values) {
+	private Object[] valuesDataType;
+
+	public Registro(String[] columns, Object[] values, String[] valuesDataType) {
 		this.columns = columns;
 		this.values = values;
+		this.valuesDataType = valuesDataType;
+	}
+	
+	public String[] getColumns() {
+		return columns;
+	}
+
+	public Object[] getValues() {
+		return values;
+	}
+
+	public Object[] getValuesDataType() {
+		return valuesDataType;
+	}
+	
+	public JSONObject getRegistroAsJson() {
+		JSONObject registroAsJson = new JSONObject();		
+		
+		for (int i = 0; i < columns.length; i++) {
+			registroAsJson.append(columns[i], values[i]);
+			
+		}	
+		return registroAsJson;
 	}
 	
 	public String getColumnAsString(String columnName) {

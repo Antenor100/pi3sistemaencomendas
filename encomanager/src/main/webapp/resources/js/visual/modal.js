@@ -1,8 +1,8 @@
-/*  Modal - Insere um modal a tela, podendo chamar quantos quiser com limite de 1 por vez
+/*  MODAL - Insere um modal a tela, podendo existir quantos quiser setados com limite de 1 aberto por vez.
 
     exemplo de parâmetro "modalProperties"
     {
-        idModalParent: "parentModalId", //Nome do elemento que o modal será inserido
+        idModalParent: "parentModalId", //Id do elemento que o modal será inserido
         title: "Informações da tela de exemplo", //String contendo titulo do modal
         body: "corpo do modal", //Aqui pode ser informado um DOM Element ou uma string comum
         okFunction: undefined, //Função chamada ao clickar no botão ok da modal
@@ -13,6 +13,9 @@
         btnCancelLabel: "Fechar", //String contendo descrição do botão cancel
         closeOnOK: true //Booleano que seta se o modal se fechará após clickar no botão ok
     }
+
+    Obs: para criar um modal deve ser feito um addeventlistener que observa o evento de click do botão que abrirá o modal e quando 
+    o evento de click for capturado deve-se executar a função novoModal() passando um objeto (modalProperties) como parâmetro.
 */
 
 var cancelFunction = undefined;
@@ -26,6 +29,17 @@ function novoModal(modalProperties) {
 function initModal() {
     $('#modalId').modal({backdrop: "static", keyboard: false});
     $('#modalId').modal('show');
+}
+
+function closeModal(action) {
+    if(cancelFunction && action == "cancel") cancelFunction();
+    $('#modalId').modal('hide');
+    document.getElementById("modalId").remove();
+}
+
+function successModal(closeOnOk) {
+    okFunction();
+    if(closeOnOk) closeModal(); 
 }
 
 function appendModal(modalProperties) {
@@ -85,6 +99,7 @@ function appendModal(modalProperties) {
             (modalProperties.cancelFunction) ? cancelFunction = modalProperties.cancelFunction : undefined;
 
     let buttonOkModal = document.createElement("button");
+		buttonOkModal.setAttribute("id", "okButton");
         buttonOkModal.setAttribute("type", "button");
         buttonOkModal.setAttribute("class", "btn btn-primary");
         buttonOkModal.setAttribute("onclick", `successModal(${(modalProperties.closeOnOK) ? true : false})`);
@@ -108,22 +123,4 @@ function appendModal(modalProperties) {
                 divModalFooter.appendChild(buttonOkModal);
     
     document.getElementById(modalProperties.idModalParent).appendChild(divModal);
-}
-
-function closeModal(action) {
-    if(cancelFunction && action == "cancel") cancelFunction();
-    $('#modalId').modal('hide');
-    document.getElementById("modalId").remove();
-}
-
-function successModal(closeOnOk) {
-    okFunction();
-    if(closeOnOk) closeModal(); 
-}
-
-function insertModalEvents() {
-    //Hide event
-    $('#modalId').on('hidden.bs.modal', function() {
-        closeModal();
-    })
 }

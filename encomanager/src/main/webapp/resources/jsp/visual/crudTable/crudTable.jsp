@@ -6,14 +6,16 @@
 
 <div class="divGeral col-12">
 	<div class="divCrudTableHeader row m-0" style="flex-wrap: wrap">
-		<div id="divCrudButtons" class="col-12 col-md-9">
+		<div id="divCrudButtons" class="col-12 col-md-6">
 			<button id="btnAdicionar" class="btn btn-success" onclick="adicionar()"><i class="fa fa-plus mr-2"></i>Adicionar</button>
 			<button id="btnRemover" class="btn btn-danger" onclick="remover()"><i class="fa fa-minus mr-2"></i>Remover</button>
 			<button id="btnEditar" class="btn btn-primary" onclick="editar()"><i class="fa fa-edit mr-2"></i>Editar</button>
 			<button id="" class="btn btn-secondary" onclick="recarregar()"><i class="fa fa-sync-alt"></i></button>
 		</div>
-		<div id="divFilterField" class="col-12 col-md-3 d-flex justify-content-end"> <!-- d-flex justify-content-end -->
-			<input id="filtroInput" type="text" placeholder="Filtro dos registros">
+		<div id="divFilterField" class="col-12 col-md-6 d-flex justify-content-end form-group"> <!-- d-flex justify-content-end -->
+			<select class="form-control mr-1" style="max-width: 300px" id="filterOptions"></select>
+			  
+			<input id="filtroInput" class="form-control" style="max-width: 300px" type="text" placeholder="Filtro dos registros">
 		</div>
 	</div>
 	
@@ -31,51 +33,8 @@
 </div>	
 
 <script type="text/javascript">
+	populaFilterSelect();
 	populaTabela();
 	vinculaListenerOnFilter();
-	
-	document.getElementById("btnAdicionar").addEventListener("click", function() {
-		novoModal({
-			idModalParent: "divModals",
-			title: "Adicionar registro",
-			body: "add registro",
-			okFunction: undefined,
-			cancelFunction: undefined,
-			showBtnOk: true,
-			btnOkLabel: "Adicionar",
-			showBtnCancel: true,
-			btnCancelLabel: "Cancelar",
-			closeOnOK: true
-		});
-	});
-	
-	document.getElementById("btnRemover").addEventListener("click", function() {
-		novoModal({
-			idModalParent: "divModals",
-			title: "Remover registro selecionado",
-			body: "rm registro",
-			okFunction: undefined,
-			cancelFunction: undefined,
-			showBtnOk: true,
-			btnOkLabel: "Remover",
-			showBtnCancel: true,
-			btnCancelLabel: "Cancelar",
-			closeOnOK: true
-		});
-	});
-	
-	document.getElementById("btnEditar").addEventListener("click", function() {
-		novoModal({
-			idModalParent: "divModals",
-			title: "Editar registro selecionado",
-			body: "edi registro",
-			okFunction: undefined,
-			cancelFunction: undefined,
-			showBtnOk: true,
-			btnOkLabel: "Editar",
-			showBtnCancel: true,
-			btnCancelLabel: "Cancelar",
-			closeOnOK: true
-		});
-	});
+	desvinculaBotoes();
 </script>
