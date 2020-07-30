@@ -9,8 +9,8 @@
 	<div id="content">
 		<script type="text/javascript">
 		var telaAbaDescricaoProperties = {
-			telaTitle: "Clientes",
-			ajudaModalBody: "Essa tela é destinada para a criação de clientes."
+			telaTitle: "Tipo de usuário e acessos",
+			ajudaModalBody: "Essa tela é destinada para a manipulação dos tipos de usuários e seus acessos."
 		};
 		</script>
 		<jsp:include page="/resources/jsp/visual/telaAbaDescricao/telaAbaDescricao.jsp"/>	
@@ -18,12 +18,12 @@
 		<div id="contentTela" class="row p-0 m-3">
 			<script type="text/javascript">
 				<%!
-					String tableName = "TGPCLI";
-					String[] columnsDescricao = new String[] {"Código", "Nome", "Email", "Celular", "Telefone", "CPF", "CNPJ", "Endereço"};
-					String[] columnsDataType = new String[] {"number", "text", "text", "text", "text", "text", "text", "text"};
-					String pkField = "CLICODIGO";
+					String tableName = "TGCTUS";
+					String[] columnsDescricao = new String[] {"Código", "Descrição"};
+					String[] columnsDataType = new String[] {"number", "text"};
+					String pkField = "TUSCODIGO";
 					String servletClassName = "/CrudServlet";
-					String jspName = "/telas/clientes/clientes.jsp";
+					String jspName = "/telas/tipoUsuarioAcesso/tipoUsuarioAcesso.jsp";
 					String pkFieldIsText = "false";
 					
 					CrudTableBO ctb = new CrudTableBO(tableName, columnsDescricao, columnsDataType, pkField, servletClassName, jspName, pkFieldIsText);	

@@ -1,6 +1,14 @@
 .divGeral {
     border: 1px solid #029BFD;
     padding: 15px;
+    margin-bottom: 16px;
+}
+
+.divCrudTableTitle {  
+    text-align: center;
+    margin-bottom: 13px;
+    font-size: 1.1em;
+    color: #007BFF;
 }
 
 /*.divCrudTableHeader {

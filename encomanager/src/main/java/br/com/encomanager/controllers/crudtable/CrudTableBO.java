@@ -11,7 +11,6 @@ import br.com.encomanager.util.Registro;
 public class CrudTableBO {
 	
 	private String tableName;
-	private Map<String, String> modifyDataMap;
 	private String[] columnsDescricao;
 	private String[] columnsDataType;
 	private String pkField;
@@ -19,6 +18,7 @@ public class CrudTableBO {
 	private CrudTableDAO ctd;
 	private String jspName;
 	private String pkFieldIsText;
+	private String whereCondition;
 	
 	public CrudTableBO(String tableName) {
 		this.tableName = tableName;
@@ -36,18 +36,21 @@ public class CrudTableBO {
 		this.pkFieldIsText = pkFieldIsText;
 	}
 	
-	public String getInitialJson() throws Exception {
-		List<Registro> query = this.ctd.getAllRegisters();
+	public String getInitialJson(boolean retornaRegistros) throws Exception {
 		
 		//JSON base para tela
 		JSONObject registrosJson = new JSONObject();
 		
 		//Lista de objetos com valores
 		List<Object[]> arrayValoresRegistro = new ArrayList<Object[]>();
-			
-		for (Registro registro : query) {
-			arrayValoresRegistro.add(registro.getValues());
-		}	
+		
+		if (retornaRegistros) {
+			List<Registro> query = this.ctd.getAllRegisters();
+		
+			for (Registro registro : query) {
+				arrayValoresRegistro.add(registro.getValues());
+			}		
+		}
 		
 		registrosJson.accumulate("values", arrayValoresRegistro);		
 		registrosJson.accumulate("columns", this.ctd.getColunas(this.tableName));	
@@ -60,6 +63,23 @@ public class CrudTableBO {
 		registrosJson.accumulate("pkFieldIsText", this.pkFieldIsText);
 		
 		return registrosJson.toString();	
+	}
+	
+	public String getValues(String whereContidion) throws Exception {
+		List<Registro> registros = ctd.getFilteredRegisters(this.tableName, whereContidion);
+		
+		//JSON base para tela
+		JSONObject registrosJson = new JSONObject();
+		
+		List<Object[]> arrayValoresRegistros = new ArrayList<Object[]>();
+		
+		for (Registro registro : registros) {
+			arrayValoresRegistros.add(registro.getValues());
+		}		
+		
+		registrosJson.accumulate("values", arrayValoresRegistros);
+
+		return registrosJson.toString();
 	}
 
 	public void createNewRegister(Map<String, String> mapNewData) throws Exception {

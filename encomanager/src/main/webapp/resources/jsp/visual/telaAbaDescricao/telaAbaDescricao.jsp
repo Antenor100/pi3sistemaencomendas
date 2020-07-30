@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link href="${pageContext.request.contextPath}/resources/jsp/visual/telaAbaDescricao/telaAbaDescricao.css" type="text/css" rel="stylesheet">
 
-<div id="divTelaAbaDescricao" class="container-fluid border-2 border-primary geral">
+<div id="divTelaAbaDescricao" style="overflow-y: auto" class="container-fluid border-2 border-primary geral">
 	<div class="row d-flex flex-nowrap m-0">
 		<div class="col-12 bg-primary header d-flex justify-content-center">
 			<span id="telaTitulo"></span>

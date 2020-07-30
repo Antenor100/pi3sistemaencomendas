@@ -65,7 +65,7 @@
 											<div class="list-group-item" onclick="habilitaTelasGrupo('grupo1')">
 												<span class="spanGrupoTela"><i class="fa fa-boxes iconSpanGrupoTela"></i>ENCOMENDAS</span>
 												<div id="grupo1" class="list-group" style="display: none">
-													<a class="list-group-item itemTela" onclick="novaTelaAcessadaAdd(this)" href="/encomanager/telas/gerarEncomenda/gerarEncomenda.jsp"><span class="nomeTela">Gerar encomenda</span></a>
+													<a class="list-group-item itemTela" onclick="novaTelaAcessadaAdd(this)" href="/encomanager/telas/gerarEncomenda/gerarEncomenda.jsp"><span class="nomeTela">Gerar e visualizar encomendas</span></a>
 													<a class="list-group-item itemTela" onclick="novaTelaAcessadaAdd(this)" href="/encomanager/telas/agendaEncomendas/agendaEncomendas.jsp"><span class="nomeTela">Agenda de encomendas</span></a>
 													<a class="list-group-item itemTela" onclick="novaTelaAcessadaAdd(this)" href="/encomanager/telas/produtos/produtos.jsp"><span class="nomeTela">Produtos</span></a>
 													<a class="list-group-item itemTela" onclick="novaTelaAcessadaAdd(this)" href="/encomanager/telas/vendas/vendas.jsp"><span class="nomeTela">Vendas</span></a>
@@ -100,7 +100,14 @@
 				
 				<!-- Content ---> <%//O conteudo desse div será substituido por outra div da tela com o id="content" caso o mesmo exista.%>
 				<div id="contentBox" class="flex-fill">
-					Conteúdo da Home
+					<div class="container mt-3">
+						<div class="jumbotron">
+							<h1 class="display-4">Bem vindo usuário</h1>
+							<p class="lead">Tenha um bom dia de trabalho!</p>
+							<hr class="my-4">
+							<p>Para começar a navegar pelas telas, basta clicar na seta <i onclick="document.getElementById('iconeExpansao').click();" class="fa fa-angle-right fa-lg text-white iconeExpansao bg-primary p-1"></i> localizada no meio da barra á esquerda.</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>	

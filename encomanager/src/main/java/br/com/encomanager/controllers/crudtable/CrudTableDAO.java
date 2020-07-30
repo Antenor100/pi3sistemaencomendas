@@ -26,15 +26,27 @@ public class CrudTableDAO {
 		return listRegistro;
 	}	
 	
+	public List<Registro> getFilteredRegisters(String tableName, String whereContidion) throws Exception {
+		DBM dbm = new DBM(MySqlConnector.abreConexao());
+		
+		List<Registro> listRegistro = dbm.select(tableName, "*", whereContidion);
+		
+		MySqlConnector.fecharConexao();
+		
+		return listRegistro;
+	}	
+	
 	public void updateRegister(String pkField, String pkValue, String pkFieldIsText, String[] fields, String[] fieldsValue, String[] fieldsDataType) throws Exception {	
 		DBM dbm = new DBM(MySqlConnector.abreConexao());
 		
 		String[] columnAndValueArray = new String[fields.length];
-		String[] valuesTransformed = transformDataFromDB(fieldsValue, fieldsDataType).split(",");
+		List<String> valuesTransformed = transformDataFromDB(fieldsValue, fieldsDataType);
 		
-		for (int i = 0; i < columnAndValueArray.length; i++) {
-			String groupColumnAndValue = fields[i] + "=" + valuesTransformed[i];
-			columnAndValueArray[i] = groupColumnAndValue;
+		int count = 0;
+		for (String value : valuesTransformed) {
+			String groupColumnAndValue = fields[count] + "=" + value;
+			columnAndValueArray[count] = groupColumnAndValue;
+			count++;
 		}
 		
 		String updateWhereCondition = null;
@@ -77,7 +89,8 @@ public class CrudTableDAO {
 		DBM dbm = new DBM(MySqlConnector.abreConexao());
 		
 		String newRequiredColumns = requiredColumns;
-		String newStringValues = transformDataFromDB(stringValues, dataType);
+		List<String> newStringValuesList = transformDataFromDB(stringValues, dataType);
+		String newStringValues = newStringValuesList.toString().replace("[", "").replace("]", "");
 		
 		dbm.insert(this.tableName, newRequiredColumns, newStringValues);
 		
@@ -94,13 +107,17 @@ public class CrudTableDAO {
 		return columnsArray;
 	}
 
-	private String transformDataFromDB(String[] stringValues, String[] dataTypeArray) {
+	private List<String> transformDataFromDB(String[] stringValues, String[] dataTypeArray) {
 		List<String> transformedDataList = new ArrayList<String>();
 		
 		for (int i = 0; i < dataTypeArray.length; i++) {
 			if (dataTypeArray[i].equals("checkbox")) {
-				transformedDataList.add("\'" + stringValues[i] + "\'");
-				
+				if (stringValues[i].equals("true")) {
+					transformedDataList.add("1");
+				} else {
+					transformedDataList.add("0");
+				}
+						
 			} else if (dataTypeArray[i].equals("date")) {
 				transformedDataList.add("\'" + stringValues[i] + "\'");
 				
@@ -118,9 +135,16 @@ public class CrudTableDAO {
 				
 			} else if (dataTypeArray[i].equals("time")) {
 				transformedDataList.add("\'" + stringValues[i] + "\'");
+			
+			} else if (dataTypeArray[i].equals("datetime-local")) {
+				String[] arrayDateTime = stringValues[i].split("T");
+				
+				if (arrayDateTime[1].split(":").length > 2) {arrayDateTime[1] = arrayDateTime[1].substring(0, arrayDateTime[1].length() - 3);}
+				
+				transformedDataList.add("STR_TO_DATE(\'" + arrayDateTime[0] + " " + arrayDateTime[1] + ":00" + "\', \'%Y-%m-%d %H:%i:%s\')");
 			}		
 		}
 		
-		return transformedDataList.toString().replace("[", "").replace("]", "");
-	}	
+		return transformedDataList;
+	}
 }

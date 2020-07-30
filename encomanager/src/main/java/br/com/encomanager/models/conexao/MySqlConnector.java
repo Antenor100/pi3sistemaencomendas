@@ -22,7 +22,7 @@ public class MySqlConnector {
 			//Configurando a nossa conexão com um banco de dados//
 			final String serverName = "localhost:3306"; //caminho do servidor do BD
 			final String mydatabase = "encomanager"; //nome do seu banco de dados
-			final String urlParams = "useTimezone=true&serverTimezone=UTC";
+			final String urlParams = "useTimezone=true&serverTimezone=America/Sao_Paulo";
 			final String username = "root"; //nome de um usuário de seu BD
 			final String password = "admin"; //sua senha de acesso
 			String url = "jdbc:mysql://" + serverName + "/" + mydatabase + "?" + urlParams;

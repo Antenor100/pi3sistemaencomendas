@@ -39,7 +39,7 @@ CREATE TABLE `tceenc` (
   KEY `ENCCODIGOUSU` (`ENCCODIGOUSU`),
   CONSTRAINT `tceenc_ibfk_1` FOREIGN KEY (`ENCCODIGOCLI`) REFERENCES `tgpcli` (`CLICODIGO`),
   CONSTRAINT `tceenc_ibfk_2` FOREIGN KEY (`ENCCODIGOUSU`) REFERENCES `tgpusu` (`USUCODIGO`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,6 +48,7 @@ CREATE TABLE `tceenc` (
 
 LOCK TABLES `tceenc` WRITE;
 /*!40000 ALTER TABLE `tceenc` DISABLE KEYS */;
+INSERT INTO `tceenc` VALUES (1,1,2,'fsdf',10.00,1000.00,1,1,'2020-07-27 16:04:00','teste','pao'),(2,2,19,'teste1',15.50,1500.25,0,1,'2020-07-29 10:26:00','thiago2','Entregar cedo e com glutem'),(3,1,2,'endereÃ§o teste',15.00,10.00,0,1,'2020-07-30 20:42:00','','QUer antes da 7');
 /*!40000 ALTER TABLE `tceenc` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -69,7 +70,7 @@ CREATE TABLE `tceien` (
   KEY `IENCODIGOENC` (`IENCODIGOENC`),
   CONSTRAINT `tceien_ibfk_1` FOREIGN KEY (`IENCODIGOPRO`) REFERENCES `tcepro` (`PROCODIGO`),
   CONSTRAINT `tceien_ibfk_2` FOREIGN KEY (`IENCODIGOENC`) REFERENCES `tceenc` (`ENCCODIGO`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,6 +79,7 @@ CREATE TABLE `tceien` (
 
 LOCK TABLES `tceien` WRITE;
 /*!40000 ALTER TABLE `tceien` DISABLE KEYS */;
+INSERT INTO `tceien` VALUES (1,1000.00,3,1,1),(2,200.00,5,2,1),(3,100.00,10,1,3);
 /*!40000 ALTER TABLE `tceien` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,7 +98,7 @@ CREATE TABLE `tcepro` (
   `PROESPECIFICACAOUNID` char(2) DEFAULT NULL,
   `PROGASTOMINSERVICO` int(11) DEFAULT NULL,
   PRIMARY KEY (`PROCODIGO`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,7 +107,7 @@ CREATE TABLE `tcepro` (
 
 LOCK TABLES `tcepro` WRITE;
 /*!40000 ALTER TABLE `tcepro` DISABLE KEYS */;
-INSERT INTO `tcepro` VALUES (1,'Bolo de chocolate','Bolo com massa de chocolate e cobertura de chocolate',75.50,'KG',120),(2,'PÃ£o de queijo','pÃ£o de queijo do dia',8.50,'KG',45),(3,'Pão francês',NULL,5.00,'KG',60),(4,'Coxinha pequena','Coxinha com massa de batata, 5cm de altura',20.00,'KG',140),(5,'Coxinha média','Coxinha com massa de batata, 7cm de altura',20.00,'KG',160),(6,'Coxinha grande','Coxinha com massa de batata, 10cm de altura',20.00,'KG',180);
+INSERT INTO `tcepro` VALUES (1,'Bolo de chocolate','Bolo com massa de chocolate e cobertura de chocolate',75.50,'KG',120),(2,'PÃ£o de queijo','pÃ£o de queijo do dia',8.50,'KG',45),(3,'Pão francês',NULL,5.00,'KG',60),(4,'Coxinha pequena','Coxinha com massa de batata, 5cm de altura',20.00,'KG',140),(5,'Coxinha média','Coxinha com massa de batata, 7cm de altura',20.00,'KG',160),(6,'Coxinha grande','Coxinha com massa de batata, 10cm de altura',20.00,'KG',180),(7,'Bolacha','Bolacha caseira',3.50,'un',10);
 /*!40000 ALTER TABLE `tcepro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -124,7 +126,7 @@ CREATE TABLE `tceven` (
   PRIMARY KEY (`VENCODIGO`),
   KEY `VENCODIGOENC` (`VENCODIGOENC`),
   CONSTRAINT `tceven_ibfk_1` FOREIGN KEY (`VENCODIGOENC`) REFERENCES `tceenc` (`ENCCODIGO`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -133,6 +135,7 @@ CREATE TABLE `tceven` (
 
 LOCK TABLES `tceven` WRITE;
 /*!40000 ALTER TABLE `tceven` DISABLE KEYS */;
+INSERT INTO `tceven` VALUES (1,'2020-07-29 10:38:00','Paga em dinheiro',1);
 /*!40000 ALTER TABLE `tceven` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -152,7 +155,7 @@ CREATE TABLE `tclild` (
   PRIMARY KEY (`ILDCODIGO`),
   KEY `ILDCODIGOENC` (`ILDCODIGOENC`),
   CONSTRAINT `tclild_ibfk_1` FOREIGN KEY (`ILDCODIGOENC`) REFERENCES `tceenc` (`ENCCODIGO`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -161,6 +164,7 @@ CREATE TABLE `tclild` (
 
 LOCK TABLES `tclild` WRITE;
 /*!40000 ALTER TABLE `tclild` DISABLE KEYS */;
+INSERT INTO `tclild` VALUES (1,'2020-07-22','10:15:00','18:17:00',1),(2,'2020-08-01','07:43:00','10:44:00',3);
 /*!40000 ALTER TABLE `tclild` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -243,7 +247,7 @@ CREATE TABLE `tgcpar` (
 
 LOCK TABLES `tgcpar` WRITE;
 /*!40000 ALTER TABLE `tgcpar` DISABLE KEYS */;
-INSERT INTO `tgcpar` VALUES ('MINUTOSERVDIARIO','I','Valor em minutos do tempo de serviço por funcionario','300','2020-07-28 00:00:00',2);
+INSERT INTO `tgcpar` VALUES ('MINUTOSERVDIARIO','I','Valor em minutos do tempo de servico por funcionario','600','2020-07-29 10:35:00',2);
 /*!40000 ALTER TABLE `tgcpar` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -258,7 +262,7 @@ CREATE TABLE `tgctus` (
   `TUSCODIGO` int(11) NOT NULL AUTO_INCREMENT,
   `TUSDESCRICAO` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`TUSCODIGO`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -267,7 +271,7 @@ CREATE TABLE `tgctus` (
 
 LOCK TABLES `tgctus` WRITE;
 /*!40000 ALTER TABLE `tgctus` DISABLE KEYS */;
-INSERT INTO `tgctus` VALUES (1,'Administrador geral');
+INSERT INTO `tgctus` VALUES (1,'Administrador geral'),(2,'Gerente de producao');
 /*!40000 ALTER TABLE `tgctus` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -288,7 +292,7 @@ CREATE TABLE `tgpcli` (
   `CLICNPJ` char(14) DEFAULT NULL,
   `CLIENDERECO` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`CLICODIGO`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -317,7 +321,7 @@ CREATE TABLE `tgpusu` (
   PRIMARY KEY (`USUCODIGO`),
   KEY `USUCODIGOTUS` (`USUCODIGOTUS`),
   CONSTRAINT `tgpusu_ibfk_1` FOREIGN KEY (`USUCODIGOTUS`) REFERENCES `tgctus` (`TUSCODIGO`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -326,7 +330,7 @@ CREATE TABLE `tgpusu` (
 
 LOCK TABLES `tgpusu` WRITE;
 /*!40000 ALTER TABLE `tgpusu` DISABLE KEYS */;
-INSERT INTO `tgpusu` VALUES (2,'antenor',1,'827ccb0eea8a706c4c34a16891f84e7b','antenor@gmail.com'),(19,'bia',1,'e10adc3949ba59abbe56e057f20f883e','bia@teste.com'),(21,'meire',1,'fcea920f7412b5da7be0cf42b8c93759','meire@gmail.com'),(24,'andreia',1,'6ebe76c9fb411be97b3b0d48b791a7c9','andreia@hotmail.com'),(25,'miguel',1,'d553d148479a268914cecb77b2b88e6a','miguel@gmail.com');
+INSERT INTO `tgpusu` VALUES (2,'antenor',1,'e10adc3949ba59abbe56e057f20f883e','antenor@gmail.com'),(19,'bia',1,'e10adc3949ba59abbe56e057f20f883e','bia@teste.com'),(21,'meire',2,'3fc26dc90ab296e41bc5fc8f9a2a7d40','meire@gmail.com'),(24,'andreia',1,'6ebe76c9fb411be97b3b0d48b791a7c9','andreia@hotmail.com'),(25,'miguel',2,'3fc26dc90ab296e41bc5fc8f9a2a7d40','miguel@gmail.com');
 /*!40000 ALTER TABLE `tgpusu` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -339,4 +343,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-29  1:32:06
+-- Dump completed on 2020-07-29 21:06:19

@@ -29,7 +29,7 @@
 					CrudTableBO ctb = new CrudTableBO(tableName, columnsDescricao, columnsDataType, pkField, servletClassName, jspName, pkFieldIsText);	
 				%>
 				
-				var tableObject = <%=ctb.getInitialJson()%>
+				var tableObject = <%=ctb.getInitialJson(true)%>
 				tableObject.mostraBotaoAdicionar = false;
 				tableObject.mostraBotaoRemover = false;
 				

@@ -1,7 +1,7 @@
 /* 
 	CRUDTABLE
 	
-	var tableObject = {
+	var tableObject3 = {
 					tableName: "TGPUSU",
 					columns: ["idusu", "nomeusu", "senhausu", "emailusu", "tipoUsu"],
 					columnsDescricao: ["Código", "Nome", "Senha", "Email", "Desc. Tipo Usuário"],
@@ -13,8 +13,8 @@
 					mostraBotaoEditar: true,
 					mostraBotaoRemover: true,
 					values: [
-						["1", "antenor", "1324", "antenor@gmail.com", "Gerente"],
-						["2", "meire", "4321", "meire@gmail.com", "Administrador"],
+						["1", "antenor", "1334", "antenor@gmail.com", "Gerente"],
+						["3", "meire", "4331", "meire@gmail.com", "Administrador"],
 						["3", "caua", "6548", "caua@gmail.com", "Produção"],
 						["4", "miguel", "7894", "miguel@gmail.com", ""],
 					]
@@ -22,41 +22,41 @@
 */
 
 /*FUNCOES DA TABLE*/
-var selectedRowElement = undefined;
+var selectedRowElement3 = undefined;
 
-function populaTabela(filterValue, descriptionFieldfilterOption) {
+function populaTabela3(filterValue, descriptionFieldfilterOption) {
 	//Adiciona nova coluna no header da tabela, caso exista não faz nada
-	let tableHeadElement = document.getElementById("tableHeadRow");
+	let tableHeadElement = document.getElementById("tableHeadRow3");
 
 	if (tableHeadElement.innerHTML == "") {
-		tableObject.columns.forEach((column, index) => {
+		tableObject3.columns.forEach((column, index) => {
 			let newHr = document.createElement("th");
 			newHr.setAttribute("abbr", column);
-			newHr.innerHTML = tableObject.columnsDescricao[index];
+			newHr.innerHTML = tableObject3.columnsDescricao[index];
 			tableHeadElement.appendChild(newHr);
 		});
 	}
 	
 	//Adiciona nova linha ao body da tabela, caso exista algo no table body, será excluido
-	let tableBody = document.getElementById("tableBody");
+	let tableBody = document.getElementById("tableBody3");
 
 	if (tableBody.innerHTML != "") {
 		tableBody.innerHTML = "";
 	}
 
-	if (tableObject.values.length > 0) {
-		tableObject.values.forEach((row) => {
-			let insereLinha = filtraRegistro(row, filterValue, descriptionFieldfilterOption);
+	if (tableObject3.values.length > 0) {
+		tableObject3.values.forEach((row) => {
+			let insereLinha = filtraRegistro3(row, filterValue, descriptionFieldfilterOption);
 
 			if (insereLinha) {
 				let newTr = document.createElement("tr");
-				newTr.setAttribute("onclick", "selectNewRow(this)");
+				newTr.setAttribute("onclick", "selectNewRow3(this)");
 				newTr.setAttribute("class", "noSelectedRow");
 			
 				row.forEach((rowColumnData, index) => {
 					let newTd = document.createElement("td");
 
-					if (tableObject.columnsDataType[index] == "checkbox") {
+					if (tableObject3.columnsDataType[index] == "checkbox") {
 						if (rowColumnData == 1) {
 							newTd.innerHTML = "Sim";
 						} else if (rowColumnData == 0){
@@ -65,7 +65,7 @@ function populaTabela(filterValue, descriptionFieldfilterOption) {
 						
 						newTr.appendChild(newTd);
 					
-					} else if (tableObject.columnsDataType[index] == "password") {
+					} else if (tableObject3.columnsDataType[index] == "password") {
 						newTd.innerHTML = "**********";
 						newTr.appendChild(newTd);
 
@@ -102,65 +102,30 @@ function populaTabela(filterValue, descriptionFieldfilterOption) {
 		divAlertRegisterNotFound.innerHTML = "Nenhum registro encontrado!"
 		tableBody.parentElement.appendChild(divAlertRegisterNotFound);
 	}
-	
-	//Analiza se existe index para selecionar linha
-	if (tableObject.selectedRowIndex != null) setSelectedRowByIndex(tableObject.selectedRowIndex);
 };
 
-function getSelectedRowIndex() {
-	let pkLinhaSelecionada = getSelectedRowPkValue();
-
-	let tableBodyChildren = document.getElementById("tableBody").children;
-
-	for (let i = 0; i < tableBodyChildren.length; i++) {
-		let rowChildren = tableBodyChildren[i].children;
-
-		let indexPkValue = tableObject.columns.indexOf(tableObject.pkField);
-		
-		let valueTdPk = rowChildren[indexPkValue].innerHTML;
-					
-		if (pkLinhaSelecionada == valueTdPk) {
-			return i;
-		}
-	}
-}
-
-function setSelectedRowByIndex(index) {
-	let tableBodyChildren = document.getElementById("tableBody").children;
-
-	for (let i = 0; i < tableBodyChildren.length; i++) {
-		if (i.toString() == index) {
-			selectNewRow(tableBodyChildren[i]);
-			return;
-		}
-	}
-}
-
-//Troca classes de estilo e seta o valor da variavel selectedRowElement com o elemento da linha selecionada
-function selectNewRow(element) {
-	if (selectedRowElement != undefined) {
-		selectedRowElement.setAttribute("class", selectedRowElement.getAttribute("class").replace("selectedRow", "noSelectedRow"));
+//Troca classes de estilo e seta o valor da variavel selectedRowElement3 com o elemento da linha selecionada
+function selectNewRow3(element) {
+	if (selectedRowElement3 != undefined) {
+		selectedRowElement3.setAttribute("class", selectedRowElement3.getAttribute("class").replace("selectedRow", "noSelectedRow"));
 	}
 
-	if (selectedRowElement == element) {
-		selectedRowElement.setAttribute("class", selectedRowElement.getAttribute("class").replace("selectedRow", "noSelectedRow"));
-		selectedRowElement = undefined;
+	if (selectedRowElement3 == element) {
+		selectedRowElement3.setAttribute("class", selectedRowElement3.getAttribute("class").replace("selectedRow", "noSelectedRow"));
+		selectedRowElement3 = undefined;
 		return;
 	}
 
-	selectedRowElement = element;
+	selectedRowElement3 = element;
 
-	selectedRowElement.setAttribute("class", selectedRowElement.getAttribute("class").replace("noSelectedRow", "selectedRow"));
-
-	//Executa função ao selecionar uma linha
-	if (tableObject.onSelectRowFunction != undefined) tableObject.onSelectRowFunction();
+	selectedRowElement3.setAttribute("class", selectedRowElement3.getAttribute("class").replace("noSelectedRow", "selectedRow"));
 }
 
-function getSelectedRowPkValue() {
-	let iteracaoSelectedRow = selectedRowElement.children;
+function getSelectedRowPkValue3() {
+	let iteracaoSelectedRow = selectedRowElement3.children;
 
 	for (let i = 0; i < iteracaoSelectedRow.length; i++) {
-		if (tableObject.columns[i] == tableObject.pkField) {
+		if (tableObject3.columns[i] == tableObject3.pkField) {
 			return iteracaoSelectedRow[i].innerHTML;
 		}
 	}
@@ -168,9 +133,9 @@ function getSelectedRowPkValue() {
 
 /*FUNCOES DO FILTRO*/
 //Retorna se deve inserir a linha ou não, dependendo do valor contido no campo de filtro.
-function filtraRegistro(row, filterValue, descriptionFieldfilterOption) {
+function filtraRegistro3(row, filterValue, descriptionFieldfilterOption) {
 	if (filterValue != undefined && filterValue != "") {
-		let indexDescription = tableObject.columnsDescricao.indexOf(descriptionFieldfilterOption);
+		let indexDescription = tableObject3.columnsDescricao.indexOf(descriptionFieldfilterOption);
 
 		let primeiroValor = row[indexDescription];
 		let segundoValor = filterValue;
@@ -201,42 +166,42 @@ function filtraRegistro(row, filterValue, descriptionFieldfilterOption) {
 }
 
 //Popula select tag com todos os possiveis campos de busca.
-function populaFilterSelect() {
-	let selectTagElement = document.getElementById("filterOptions");
+function populaFilterSelect3() {
+	let selectTagElement = document.getElementById("filterOptions3");
 
 	let optionElementDefault = document.createElement("option");
 	optionElementDefault.innerHTML = "Campo à filtrar";
 	optionElementDefault.setAttribute("selected", "");
 	selectTagElement.appendChild(optionElementDefault);
 
-	tableObject.columnsDescricao.forEach(descricao => {
+	tableObject3.columnsDescricao.forEach(descricao => {
 		let optionElement = document.createElement("option");
 		optionElement.innerHTML = descricao;
 		selectTagElement.appendChild(optionElement);
 	});
 }
 
-function vinculaListenerOnFilter() {
-	document.getElementById("filtroInput").addEventListener('input', function() {
-		let opcaoCampoFilter = document.getElementById("filterOptions").value;
-		populaTabela(this.value, opcaoCampoFilter);
+function vinculaListenerOnFilter3() {
+	document.getElementById("filtroInput3").addEventListener('input', function() {
+		let opcaoCampoFilter = document.getElementById("filterOptions3").value;
+		populaTabela3(this.value, opcaoCampoFilter);
 	});
 
-	document.getElementById("filterOptions").addEventListener('change', function() {
-		let filterInputValue = document.getElementById("filtroInput").value;
-		populaTabela(filterInputValue, this.value);
+	document.getElementById("filterOptions3").addEventListener('change', function() {
+		let filterInputValue = document.getElementById("filtroInput3").value;
+		populaTabela3(filterInputValue, this.value);
 	});
 }
 
 /*FUNCOES DOS BOTOES DE CRUD*/
 var modalProperties = undefined;
 
-function adicionar() {
+function adicionar3() {
 	novoModal({
-		idModalParent: "divModals",
+		idModalParent: "divModals3",
 		title: "Adicionar novo registro",
-		body: createFormWithSelectedRowFields(false),
-		okFunction: addEventListerToOKButton("create"),
+		body: createFormWithSelectedRowFields3(false),
+		okFunction: addEventListerToOKButton3("create"),
 		cancelFunction: undefined,
 		showBtnOk: true,
 		btnOkLabel: "Adicionar",
@@ -246,21 +211,21 @@ function adicionar() {
 	});
 }				
 
-function remover() {
-	if (selectedRowElement == undefined) {
+function remover3() {
+	if (selectedRowElement3 == undefined) {
 		confirm("Para remover um registro é necessário seleciona-lo na tabela!");	
 		return;
 	}
 	
-	let indexPkField = tableObject.columns.indexOf(tableObject.pkField);
-	let descricaoPkField = tableObject.columnsDescricao[indexPkField];
-	let valorPkField = selectedRowElement.children[indexPkField].innerHTML;
+	let indexPkField = tableObject3.columns.indexOf(tableObject3.pkField);
+	let descricaoPkField = tableObject3.columnsDescricao[indexPkField];
+	let valorPkField = selectedRowElement3.children[indexPkField].innerHTML;
 	
 	novoModal({
-		idModalParent: "divModals",
+		idModalParent: "divModals3",
 		title: "Remover registro selecionado",
-		body: createFormWithSelectedRowFields(true, true, `Deseja realmente remover o registro de '${descricaoPkField} = ${valorPkField}' da base de dados?`),
-		okFunction: addEventListerToOKButton("delete"),
+		body: createFormWithSelectedRowFields3(true, true, `Deseja realmente remover o registro de '${descricaoPkField} = ${valorPkField}' da base de dados?`),
+		okFunction: addEventListerToOKButton3("delete"),
 		cancelFunction: undefined,
 		showBtnOk: true,
 		btnOkLabel: "Remover",
@@ -270,17 +235,17 @@ function remover() {
 	});
 }
 
-function editar() {
-	if (selectedRowElement == undefined) {
+function editar3() {
+	if (selectedRowElement3 == undefined) {
 		confirm("Para editar um registro é necessário seleciona-lo na tabela!");	
 		return;
 	}
 
 	novoModal({
-		idModalParent: "divModals",
+		idModalParent: "divModals3",
 		title: "Editar registro selecionado",
-		body: createFormWithSelectedRowFields(true),
-		okFunction: addEventListerToOKButton("update"),
+		body: createFormWithSelectedRowFields3(true),
+		okFunction: addEventListerToOKButton3("update"),
 		cancelFunction: undefined,
 		showBtnOk: true,
 		btnOkLabel: "Editar",
@@ -290,45 +255,45 @@ function editar() {
 	});
 }
 
-function recarregar() {
+function recarregar3() {
 	document.location.reload(true);
 }
 
 //Cria o form colocado no corpo dos modais dos botões de crud
-function createFormWithSelectedRowFields(ehEdicao, ehRemocao = false, msg = undefined) {
+function createFormWithSelectedRowFields3(ehEdicao, ehRemocao = false, msg = undefined) {
 	let formElement = document.createElement("form");
 	formElement.setAttribute("id", `formId`);
-	formElement.setAttribute("action", tableObject.contextPath + tableObject.servletClassName);
+	formElement.setAttribute("action", tableObject3.contextPath + tableObject3.servletClassName);
 	formElement.setAttribute("method", "post");
 
 	if (!ehRemocao) {
 		let arrayIteracaoCampos;
 
 		if (ehEdicao) {
-			if (selectedRowElement.children != undefined) {
-				arrayIteracaoCampos = selectedRowElement.children;
+			if (selectedRowElement3.children != undefined) {
+				arrayIteracaoCampos = selectedRowElement3.children;
 			}
 		} else {
-			arrayIteracaoCampos = tableObject.columns;
+			arrayIteracaoCampos = tableObject3.columns;
 		}
 
 		for (let i = 0; i < arrayIteracaoCampos.length; i++) {
 			//Implementação para não apresentar o campo Pk da grid nos forms de adicionar e edição
-			if (tableObject.columns[i] == tableObject.pkField) continue; 
+			if (tableObject3.columns[i] == tableObject3.pkField) continue; 
 
 			let divFormGroup = document.createElement("div");
 			divFormGroup.setAttribute("class", "form-group");
 
 			let labelInputField = document.createElement("label");
 			labelInputField.setAttribute("for", `input${i}`);
-			labelInputField.innerHTML = tableObject.columnsDescricao[i];
+			labelInputField.innerHTML = tableObject3.columnsDescricao[i];
 
 			let inputRowChild = document.createElement("input");
 			inputRowChild.setAttribute("id", `input${i}`);
-			inputRowChild.setAttribute("name", tableObject.columns[i]);
-			inputRowChild.setAttribute("type", tableObject.columnsDataType[i]);
+			inputRowChild.setAttribute("name", tableObject3.columns[i]);
+			inputRowChild.setAttribute("type", tableObject3.columnsDataType[i]);
 
-			if (tableObject.columnsDataType[i] == "checkbox") {
+			if (tableObject3.columnsDataType[i] == "checkbox") {
 				if (arrayIteracaoCampos[i].innerHTML == "Não") {
 					inputRowChild.removeAttribute("checked");
 
@@ -339,12 +304,12 @@ function createFormWithSelectedRowFields(ehEdicao, ehRemocao = false, msg = unde
 					inputRowChild.removeAttribute("checked");
 				}
 
-			} else if(tableObject.columnsDataType[i] == "datetime-local") {
+			} else if(tableObject3.columnsDataType[i] == "datetime-local") {
 				let sqlTime = arrayIteracaoCampos[i].innerHTML;
 				if (sqlTime != undefined) {
 					let arrayDataTime = sqlTime.split(" ");
 	
-					let formDataValue = `${arrayDataTime[0]}T${arrayDataTime[1].substring(0, arrayDataTime[1].length-2)}`
+					let formDataValue = `${arrayDataTime[0]}T${arrayDataTime[1].substring(0, arrayDataTime[1].length-3)}`
 	
 					inputRowChild.setAttribute("value", (ehEdicao) ? formDataValue : "");
 				}
@@ -369,20 +334,20 @@ function createFormWithSelectedRowFields(ehEdicao, ehRemocao = false, msg = unde
 }
 
 //Gera função do btn ok (dados para o backend)
-function okFunctionBase(operacao) {
+function okFunctionBase3(operacao) {
 	let formElement = document.getElementById("formId");
 	
 	if (formElement != undefined) {
 
 		let jsonRequest = {
 			crudTipoOperacao: operacao,
-			tableName: tableObject.tableName,
+			tableName: tableObject3.tableName,
 			fieldsName: [],
 			fieldsValue: [],
 			fieldsDataType: [],
 			pkFieldName: undefined,
 			pkFieldValue: undefined,
-			pkFieldIsText: tableObject.pkFieldIsText
+			pkFieldIsText: tableObject3.pkFieldIsText
 		}
 
 		let filhosForm = formElement.children;
@@ -397,14 +362,14 @@ function okFunctionBase(operacao) {
 					jsonRequest.fieldsValue.push(filhosForm[i].children[1].value);
 				}	
 
-				jsonRequest.fieldsDataType.push(tableObject.columnsDataType[tableObject.columns.indexOf(filhosForm[i].children[1].getAttribute("name"))]);
+				jsonRequest.fieldsDataType.push(tableObject3.columnsDataType[tableObject3.columns.indexOf(filhosForm[i].children[1].getAttribute("name"))]);
 			}
 		}
 	
 		//caso não for create a pk deve ser setada nos atributos
 		if (operacao != "create") {
-			jsonRequest.pkFieldName = tableObject.pkField
-			jsonRequest.pkFieldValue = getSelectedRowPkValue();		
+			jsonRequest.pkFieldName = tableObject3.pkField
+			jsonRequest.pkFieldValue = getSelectedRowPkValue3();		
 		}
 	
 		let inputWithJson = document.createElement("input");
@@ -415,7 +380,7 @@ function okFunctionBase(operacao) {
 		
 		let jspName = document.createElement("input");
 		jspName.setAttribute("name", "jspName");
-		jspName.setAttribute("value", tableObject.jspName);
+		jspName.setAttribute("value", tableObject3.jspName);
 		jspName.setAttribute("style", "display: none");
 		formElement.appendChild(jspName);
 
@@ -424,29 +389,29 @@ function okFunctionBase(operacao) {
 };
 
 
-function addEventListerToOKButton(operacao) {
+function addEventListerToOKButton3(operacao) {
 	setTimeout(() => {
-		document.getElementById("okButton").addEventListener("click", () => {okFunctionBase(operacao)});
+		document.getElementById("okButton").addEventListener("click", () => {okFunctionBase3(operacao)});
 	}, 50);
 }
 
-function desvinculaBotoes() {
-	let showBtnAdd = tableObject.mostraBotaoAdicionar;
-	let showBtnRemove = tableObject.mostraBotaoRemover;
-	let showBtnEdit = tableObject.mostraBotaoEditar;
+function desvinculaBotoes3() {
+	let showBtnAdd = tableObject3.mostraBotaoAdicionar;
+	let showBtnRemove = tableObject3.mostraBotaoRemover;
+	let showBtnEdit = tableObject3.mostraBotaoEditar;
 	
 	if (showBtnAdd != undefined && !showBtnAdd) {
-		let btnElement = document.getElementById("btnAdicionar");
+		let btnElement = document.getElementById("btnAdicionar3");
 		btnElement.remove();
 	}
 	
 	if (showBtnEdit != undefined && !showBtnEdit) {
-		let btnElement = document.getElementById("btnEditar");
+		let btnElement = document.getElementById("btnEditar3");
 		btnElement.remove();
 	}
 	
 	if (showBtnRemove != undefined && !showBtnRemove) {
-		let btnElement = document.getElementById("btnRemover");
+		let btnElement = document.getElementById("btnRemover3");
 		btnElement.remove();
 	}
 }
